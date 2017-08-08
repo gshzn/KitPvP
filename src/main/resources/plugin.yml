@@ -1,0 +1,4 @@
+name: KitPvP
+main: me.iamguus.minecraft.KitPvP
+version: 1.0-BETA
+description: KitPvP plugin for MC server
