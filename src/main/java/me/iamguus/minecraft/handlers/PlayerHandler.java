@@ -16,7 +16,7 @@ public class PlayerHandler {
 
     private KitPvP plugin;
 
-    private Map<UUID, KPlayer> players;
+    public Map<UUID, KPlayer> players;
 
     public PlayerHandler(KitPvP plugin) {
         this.plugin = plugin;
@@ -30,13 +30,14 @@ public class PlayerHandler {
         List<Kit> kits = new ArrayList<Kit>();
 
         ArrayList<Document> kitList = playerDoc.get("kits", new ArrayList<Document>());
-        for (Document kitDoc : kitList) {
+        for (int i = 0; i < kitList.size(); i++) {
+            Document kitDoc = kitList.get(i);
             List<KitItem> kitItems = new ArrayList<KitItem>();
             for (Map.Entry<String, Object> entry : kitDoc.entrySet()) {
                 Document tempDoc = (Document) entry.getValue();
                 kitItems.add(KitItem.fromString(tempDoc));
             }
-            kits.add(new Kit(uuid, kitItems));
+            kits.add(new Kit((i + 1), uuid, kitItems));
         }
 
         this.players.put(uuid, new KPlayer(uuid, kits));

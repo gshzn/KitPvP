@@ -11,12 +11,18 @@ import java.util.*;
  */
 public class Kit {
 
+    private int id;
     private UUID owner;
     private List<KitItem> items;
 
-    public Kit(UUID owner, List<KitItem> items) {
+    public Kit(int id, UUID owner, List<KitItem> items) {
+        this.id = id;
         this.owner = owner;
         this.items = items;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public UUID getOwner() {
@@ -37,6 +43,6 @@ public class Kit {
         kitItems.add(new KitItem(Material.IRON_LEGGINGS, "Iron Leggings", new ArrayList<String>(), KitItemType.LEGGINGS, 0));
         kitItems.add(new KitItem(Material.IRON_BOOTS, "Iron Boots", new ArrayList<String>(), KitItemType.BOOTS, 0));
 
-        return new Kit(uuid, kitItems);
+        return new Kit(1, uuid, kitItems);
     }
 }

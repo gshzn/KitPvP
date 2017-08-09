@@ -3,6 +3,7 @@ package me.iamguus.minecraft.models;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -12,9 +13,9 @@ public class InventoryFactory {
 
     private String title;
     private int size;
-    private Set<KItem> items;
+    private List<KItem> items;
 
-    public InventoryFactory(String title, int size, Set<KItem> items) {
+    public InventoryFactory(String title, int size, List<KItem> items) {
         this.title = title;
         this.size = size;
         this.items = items;
@@ -28,7 +29,7 @@ public class InventoryFactory {
         return size;
     }
 
-    public Set<KItem> getItems() {
+    public List<KItem> getItems() {
         return items;
     }
 

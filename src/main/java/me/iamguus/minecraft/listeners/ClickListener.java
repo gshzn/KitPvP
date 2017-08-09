@@ -1,5 +1,6 @@
 package me.iamguus.minecraft.listeners;
 
+import me.iamguus.minecraft.KitPvP;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -12,9 +13,9 @@ import org.bukkit.plugin.Plugin;
  */
 public class ClickListener implements Listener {
 
-    private Plugin plugin;
+    private KitPvP plugin;
 
-    public ClickListener(Plugin plugin) {
+    public ClickListener(KitPvP plugin) {
         this.plugin = plugin;
 
         Bukkit.getPluginManager().registerEvents(this, this.plugin);
@@ -23,9 +24,9 @@ public class ClickListener implements Listener {
     @EventHandler
     public void onClick(PlayerInteractEvent event) {
         if (event.getAction().name().contains("BLOCK")) {
-            event.setCancelled(true);
             if (event.getClickedBlock().getType() == Material.ANVIL) {
-                //TODO: Open GUI
+                event.setCancelled(true);
+                event.getPlayer().openInventory(plugin.inventoryHandler.startEditKit(plugin.playerHandler.players.get(event.getPlayer().getUniqueId())));
             }
         }
     }

@@ -9,6 +9,9 @@
       <plugin>
         <artifactId>maven-jar-plugin</artifactId>
         <version>2.4</version>
+        <configuration>
+          <outputDirectory>../../../Servers/1.8 Server/plugins/</outputDirectory>
+        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
@@ -26,9 +29,6 @@
             </configuration>
           </execution>
         </executions>
-        <configuration>
-          <outputDirectory>..\..\Servers\1.8 Server\plugins</outputDirectory>
-        </configuration>
       </plugin>
     </plugins>
   </build>

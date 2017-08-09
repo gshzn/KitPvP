@@ -13,5 +13,5 @@ public enum KitItemType {
     HELMET,
     CHESTPLATE,
     LEGGINGS,
-    BOOTS;
+    BOOTS
 }
