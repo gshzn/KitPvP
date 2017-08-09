@@ -2,13 +2,14 @@ package me.iamguus.minecraft.handlers;
 
 import me.iamguus.minecraft.KitPvP;
 import me.iamguus.minecraft.models.*;
+import me.iamguus.minecraft.models.collections.*;
+import me.iamguus.minecraft.models.collections.Collection;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -18,8 +19,11 @@ public class InventoryHandler {
 
     private KitPvP plugin;
 
+    private CollectionHandler collectionHandler;
+
     public InventoryHandler(KitPvP plugin) {
         this.plugin = plugin;
+        this.collectionHandler = plugin.collectionHandler;
     }
 
     private int calculateSize(int amount) {
@@ -117,6 +121,38 @@ public class InventoryHandler {
         items.add(new KItem(25, createItem(Material.IRON_FENCE, ChatColor.RED + "Coming Soon!", Arrays.asList("", ChatColor.GRAY + "Coming Soon!"))));
 
         return new InventoryFactory("Kit #" + k.getId(), size, items).create();
+    }
+
+    public Inventory getEggInventory() {
+        int size = 27;
+        List<KItem> items = new ArrayList<KItem>();
+
+        for (int i = 0; i < size; i++) {
+            items.add(new KItem(i, createItem(Material.STAINED_GLASS_PANE, " ", new ArrayList<String>(), (short) 15)));
+        }
+
+        HashMap<Integer, Integer[]> slotsMap = new HashMap<Integer, Integer[]>() {
+            {
+                put(1, new Integer[] { 13 });
+                put(2, new Integer[] { 12, 14 });
+                put(3, new Integer[] { 11, 13, 15 });
+                put(4, new Integer[] { 10, 12, 14, 16 });
+            }
+        };
+
+        List<Collection> collections = collectionHandler.getRollableCollections();
+        Integer[] slots = slotsMap.get(collections.size());
+        for (int i = 0; i < collections.size(); i++) {
+            Collection c = collections.get(i);
+            int slot = slots[i];
+            items.add(new KItem(slot, createItem(c.getItem(), ChatColor.BLUE + "The " + c.getName() + " Collection", Arrays.asList("",
+                    ChatColor.GRAY + "Click me to roll the",
+                    ChatColor.BLUE + c.getName() + ChatColor.GRAY + " Collection!",
+                    "",
+                    ChatColor.GRAY + "Click to roll"))));
+        }
+
+        return new InventoryFactory("Egg Roller", size, items).create();
     }
 
     private ItemStack createItem(Material material, String name, List<String> lore) {

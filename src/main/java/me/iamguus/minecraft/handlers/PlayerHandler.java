@@ -24,7 +24,7 @@ public class PlayerHandler {
         this.players = new HashMap<UUID, KPlayer>();
     }
 
-    public void loadPlayerKits(UUID uuid) {
+    public void loadPlayerRecords(UUID uuid) {
         Document playerDoc = plugin.mongoHandler.findPlayer(uuid);
 
         List<Kit> kits = new ArrayList<Kit>();
@@ -40,13 +40,15 @@ public class PlayerHandler {
             kits.add(new Kit((i + 1), uuid, kitItems));
         }
 
-        this.players.put(uuid, new KPlayer(uuid, kits));
+        int eggs = playerDoc.getInteger("eggs", 0);
+
+        this.players.put(uuid, new KPlayer(uuid, kits, eggs));
 
     }
 
     public void createPlayerRecords(Player player) {
         if (!this.plugin.mongoHandler.exists(player.getUniqueId())) {
-            KPlayer newPlayer = new KPlayer(player.getUniqueId(), Arrays.asList(Kit.createDefault(player.getUniqueId())));
+            KPlayer newPlayer = new KPlayer(player.getUniqueId(), Arrays.asList(Kit.createDefault(player.getUniqueId())), 0);
 
             this.plugin.mongoHandler.insertNewPlayer(newPlayer);
         }

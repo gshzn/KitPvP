@@ -26,6 +26,6 @@ public class JoinListener implements Listener {
         Player player = event.getPlayer();
 
         plugin.playerHandler.createPlayerRecords(player);
-        plugin.playerHandler.loadPlayerKits(player.getUniqueId());
+        plugin.playerHandler.loadPlayerRecords(player.getUniqueId());
     }
 }

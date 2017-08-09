@@ -1,5 +1,6 @@
 package me.iamguus.minecraft;
 
+import me.iamguus.minecraft.handlers.CollectionHandler;
 import me.iamguus.minecraft.handlers.InventoryHandler;
 import me.iamguus.minecraft.handlers.MongoHandler;
 import me.iamguus.minecraft.handlers.PlayerHandler;
@@ -16,10 +17,12 @@ public class KitPvP extends JavaPlugin {
     public PlayerHandler playerHandler;
     public MongoHandler mongoHandler;
     public InventoryHandler inventoryHandler;
+    public CollectionHandler collectionHandler;
 
     public void onEnable() {
-        playerHandler = new PlayerHandler(this);
         mongoHandler = new MongoHandler(this);
+        collectionHandler = new CollectionHandler(this);
+        playerHandler = new PlayerHandler(this);
         inventoryHandler = new InventoryHandler(this);
 
         new ClickListener(this);

@@ -27,6 +27,10 @@ public class ClickListener implements Listener {
             if (event.getClickedBlock().getType() == Material.ANVIL) {
                 event.setCancelled(true);
                 event.getPlayer().openInventory(plugin.inventoryHandler.startEditKit(plugin.playerHandler.players.get(event.getPlayer().getUniqueId())));
+            } else
+            if (event.getClickedBlock().getType() == Material.DRAGON_EGG) {
+                event.setCancelled(true);
+                event.getPlayer().openInventory(plugin.inventoryHandler.getEggInventory());
             }
         }
     }

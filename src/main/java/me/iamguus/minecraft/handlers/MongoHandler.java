@@ -21,7 +21,8 @@ public class MongoHandler {
 
     private Plugin plugin;
     private MongoClient client;
-    private MongoDatabase db;
+
+    public MongoDatabase db;
 
     public MongoHandler(Plugin plugin) {
         this.plugin = plugin;

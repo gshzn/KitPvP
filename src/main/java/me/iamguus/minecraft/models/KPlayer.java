@@ -12,10 +12,12 @@ public class KPlayer {
 
     private UUID uuid;
     private List<Kit> kits;
+    private int eggs;
 
-    public KPlayer(UUID uuid, List<Kit> kits) {
+    public KPlayer(UUID uuid, List<Kit> kits, int eggs) {
         this.uuid = uuid;
         this.kits = kits;
+        this.eggs = eggs;
     }
 
     public UUID getUuid() {
@@ -24,5 +26,9 @@ public class KPlayer {
 
     public List<Kit> getKits() {
         return kits;
+    }
+
+    public int getEggs() {
+        return eggs;
     }
 }
